@@ -1,3 +1,9 @@
+# Table of Contents
+- [Installation and Setup](#installation-and-setup)
+	- [Requirements](#Requirements)
+		- [Python](#Python)
+		- [MySQL](#MySQL)
+# Description
 # Installation and Setup
 ## Requirements
 ### Python
