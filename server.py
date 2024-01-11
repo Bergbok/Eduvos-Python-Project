@@ -59,7 +59,7 @@ class Server:
                 except:
                     pass
 
-                query = "INSERT INTO customers (fname, sname, address, phone) VALUES ({}, {}, {}, {})".format(deserialized_request["fname"], deserialized_request["sname"], deserialized_request["address"], deserialized_request["phone"])
+                query = "INSERT INTO customers (fname, sname, address, phone) VALUES ('{}', '{}', '{}', '{}')".format(deserialized_request["fname"], deserialized_request["sname"], deserialized_request["address"], deserialized_request["phone"])
 
                 try:
                     cur.execute(query)
@@ -82,7 +82,7 @@ class Server:
                 except:
                     pass
 
-                query = "INSERT INTO items (iname, descrip, price, count) VALUES ({}, {}, {}, {})".format(deserialized_request["iname"], deserialized_request["descrip"], deserialized_request["price"], deserialized_request["count"])
+                query = "INSERT INTO items (iname, descrip, price, count) VALUES ('{}', '{}', {}, {})".format(deserialized_request["iname"], deserialized_request["descrip"], deserialized_request["price"], deserialized_request["count"])
 
                 try:
                     cur.execute(query)
@@ -244,7 +244,7 @@ class Server:
                     invoice += "\nTotal: R{}".format(total_price)
                     invoice += "\n=========================================="
 
-                    # Write invoice to text file (writes to %UserProfile%)
+                    # Write invoice to text file (writes to the cwd, so make sure you run this script from a consistent location)
                     try:
                         text_file = open("%s.txt" % invoiceId, "w")
                         text_file.write(invoice)
