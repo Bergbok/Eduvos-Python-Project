@@ -50,6 +50,6 @@ If MySQL isn't running, a variety of errors might occur. To ensure it's running:
 - **Windows**: Press `Win + R`, type `services.msc`, look for MySQL and ensure it's running.
 - **Linux**:  Run `sudo systemctl start mysql`
 # Screenshots
-![Screenshots/Registration%20(choice%201%20and%202).jpg]
-![Screenshots/Buying%20(choice%203).jpg]
-![Screenshots/Invoice%20request%20(choice%204).jpg]
+![Screenshots/Registration-(choice-1-and-2).jpg]
+![Screenshots/Buying-(choice-3).jpg]
+![Screenshots/Invoice-request-(choice-4).jpg]
