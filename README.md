@@ -29,7 +29,7 @@ The client takes user input and makes requests to the server. Features include: 
 - **Linux**: Run `sudo <your_package_manager> install mysql-server`. After the installation, run the security script that comes with the installation `sudo mysql_secure_installation`
 #### Additional Setup
 ##### Run setup scripts  
-You'll need to run [1. Create_Database_And_Tables.sql](SQL-Scripts/1. Create_Database_And_Tables.sql) and (optionally) [2. Sample_Data_Inserts.sql](SQL-Scripts/2. Sample_Data_Inserts.sql).  
+You'll need to run [1. Create_Database_And_Tables.sql](SQL%20Scripts/1.%20Create_Database_And_Tables.sql) and (optionally) [2. Sample_Data_Inserts.sql](SQL%20Scripts/2.%20Sample_Data_Inserts.sql).  
 Two ways to run them are:
 1. Open the scripts in MySQL Workbench and run them from there.
 2. Open MySQL's command line client, and run `source <path>` (replace \<path> with the full path to the script).
