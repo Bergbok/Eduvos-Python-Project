@@ -4,6 +4,7 @@
 import socket
 import json
 
+# Client class for sending and receiving data from server
 class Client:
   def __init__(self, host, port, bufsize = 100000, timeout = 10):
     self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -24,6 +25,7 @@ class Client:
   def recv(self):
     return str(self.client.recv(self.bufsize),encoding="ascii")
 
+# Prints menu to console
 def print_menu():
     menu_string = "=================================\n"
     menu_string += "|          NETWORK STORE        |\n"
@@ -38,6 +40,7 @@ def print_menu():
     menu_string += "=================================\n"
     print(menu_string)
 
+# Sends request to server
 def make_server_request(request_dictionary):
     serialized_dictionary = json.dumps(request_dictionary)
 
@@ -50,10 +53,12 @@ def make_server_request(request_dictionary):
         print("Server is not running. Please start the server and try again.")
 
 def main():
+    # Infinite loop to keep menu running
     while True:
         print_menu()
         choice = input("Choice: ")
 
+        # Registers customer
         if choice == "1" or choice == "Register Customer":
             request_dictionary = {
                 "request_type" : "Register Customer",
@@ -64,6 +69,7 @@ def main():
             }
             make_server_request(request_dictionary)
 
+        # Registers items
         elif choice == "2" or choice == "Register Item":
             request_dictionary = {
                 "request_type" : "Register Item",
@@ -74,6 +80,7 @@ def main():
             }
             make_server_request(request_dictionary)
 
+        # Buys items
         elif choice == "3" or choice == "Buy Items":
             request_dictionary = {
                 "request_type": "Buy Items",
@@ -81,6 +88,7 @@ def main():
                 "sname": input("[REQUIRED] Who's buying? (surname): "),
             }
 
+            # Get items to buy
             item_array = []
             still_inputting = True
             while still_inputting:
@@ -103,10 +111,13 @@ def main():
 
                 print("{} items currently in cart".format(len(item_array)))
                 still_inputting = False if input("End input? (end = xxx): ") == "xxx" else True
-                
+            
+            # Add items to request
             request_dictionary["items"] = item_array
+            # Send buy request to server
             make_server_request(request_dictionary)
 
+        # Requests invoice
         elif choice == "4" or choice == "Request Invoice":
             request_dictionary = {
                 "request_type": "Request Invoice",
@@ -114,6 +125,7 @@ def main():
             }
             make_server_request(request_dictionary)
 
+        # Exits program
         elif choice == "x":
             print("Exiting...")
             break
@@ -121,5 +133,6 @@ def main():
         else:
             print("Invalid choice. Please try again.")
 
+# Runs main function
 if __name__ == "__main__":
     main()

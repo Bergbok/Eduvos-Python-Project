@@ -7,6 +7,7 @@ from datetime import date
 
 import mysql.connector
 
+# Server class for accepting requests from client
 class Server:
     def __init__(self, port, listen = 5, timeout = 10, buf = 4096, queueSize = 10):
         self.port = port
@@ -25,6 +26,7 @@ class Server:
     def recv(self, conn):
         return str(conn.recv(self.bufsize),encoding="ascii")
     
+    # Connects to database and returns connection object
     def connect_to_db(self):
         try:
             db_conn = mysql.connector.connect(user=self.db_username,
@@ -38,6 +40,7 @@ class Server:
             print("ERROR: Unable to connect to database")
             return None
 
+    # Waits for client connections and processes requests
     def run(self):
         print("Server started...\nPort:",self.port,"\nListen number:",self.listen)
         self.soc.bind(('', self.port))
@@ -52,6 +55,7 @@ class Server:
             request_type = deserialized_request["request_type"]
             print('Request type received from client (@ '+str(client_address[0]) + '):',request_type)
 
+            # Adds customer to database
             if request_type == "Register Customer":
                 try:
                     db_conn = self.connect_to_db()
@@ -74,7 +78,8 @@ class Server:
                     db_conn.close()
                 except:
                     pass
-
+            
+            # Adds item to database
             elif request_type == "Register Item":
                 try:
                     db_conn = self.connect_to_db()
@@ -98,6 +103,7 @@ class Server:
                 except:
                     pass
 
+            # Lists items in database
             elif request_type == "List Items":
                 try:
                     db_conn = self.connect_to_db()
@@ -150,7 +156,8 @@ class Server:
                     db_conn.close()
                 except:
                     pass
-        
+                    
+            # Buys items and outputs invoice to text file
             elif request_type == "Buy Items":
                 try:
                     db_conn = self.connect_to_db()
@@ -217,7 +224,7 @@ class Server:
                         print ("{}: No invoices found for query: {}".format(type(error).__name__, query))
                         error_occured = True
                 
-                # Output invoice to textfile and update item count
+                # Output invoice to textfile and update item count in database
                 if not error_occured:
                     invoice = "=================INVOICE=================="
                     invoice += "\nCustomer Name: {}\nCustomer Surname: {}\nInvoice number: {}"
@@ -266,6 +273,7 @@ class Server:
                 except:
                     pass
 
+            # Reads invoice from text file and returns content to client
             elif request_type == "Request Invoice":
                 filename = deserialized_request["invoice_number"] + ".txt"
                 try:
@@ -280,6 +288,7 @@ class Server:
             self.send(client_conn, "\n" + client_back + "\n")
             client_conn.close()
 
+# Runs server
 if __name__ == "__main__":
     s = Server(8081, listen = 1000)
     s.run()
