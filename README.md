@@ -12,7 +12,7 @@
 	- [Ensure MySQL is running](#Ensure-MySQL-is-running)
 - [Screenshots](#Screenshots)
 # Description
-To learn more about the scenario this project is based on check out [the specification](Marksheet---Specification/ITPYA0 – Project 2 Specification 2021 (V3.0) (IS).pdf).
+To learn more about the scenario this project is based on check out [the specification](https://github.com/Bergbok/Eduvos-Python-Project/blob/9cd4b5e750a53ce28da0446e6fd902dbba94a95b/Marksheet%20%26%20Specification/ITPYA0%20%E2%80%93%20Project%202%20Specification%202021%20(V3.0)%20(IS).pdf).
 
 Consists of a [server](server.py) and a [client](client.py).   
 The server waits for requests from clients and responds by interacting with a MySQL database and text files.    
